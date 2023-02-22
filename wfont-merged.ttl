@@ -1,0 +1,975 @@
+@prefix : <https://w3id.org/wfont-merged#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://w3id.org/wfont-merged> .
+
+<https://w3id.org/wfont-merged> rdf:type owl:Ontology ;
+                                 <http://creativecommons.org/ns#license> <http://purl.org/NET/rdflicense/cc-by4.0> ,
+                                                                         <https://creativecommons.org/licenses/by-nc/4.0/> ,
+                                                                         "http://purl.org/NET/rdflicense/cc-by4.0"^^xsd:string ;
+                                 <http://purl.org/dc/terms/contributor> """Francisco Javier Diez <mailto:francisco.diez>
+Gonzalo Gil <mailto:gonzalo.gil@tekniker.es>
+Egoitz Konde <mailto:egoitz.konde@tekniker.es>""" ;
+                                 <http://purl.org/dc/terms/created> "2018-05-20"^^xsd:string ,
+                                                                    "2021-10-05"^^xsd:string ;
+                                 <http://purl.org/dc/terms/creator> "Iker Esnaola-Gonzalez <mailto:iker.esnaola@tekniker.es>" ,
+                                                                    """Iker Esnaola-Gonzalez <mailto:iker.esnaola@tekniker.es>
+Jesús Bermúdez <mailto:jesus.bermudez@ehu.eus>"""^^xsd:string ;
+                                 <http://purl.org/dc/terms/description> """The AffectedBy ODP consists of two classes aff:FeatureOfInterest and aff:Quality; and three properties aff:influencedBy, aff:belongsTo, and aff:affectedBy. 
+
+This ODP is a reengineering of the SEAS Feature of Interest ontology (https://ci.mines-stetienne.fr/seas/FeatureOfInterestOntology-1.0). The constraint on the property seas:derivesFrom to be symmetric is unnecessary and sometimes innapropriate. For instance, the temperature of a room may derive from the occupancy of the room; however, it is not necessary that the occupancy derives from the temperature of the room. A new property aff:affectedBy (released from the symmetric constraint) is defined in the AffectedBy ODP to replace the role of the property seas:derivesFrom. It can be asserted that seas:derivesFrom is sub property of aff:affectedBy. The class aff:FeatureOfInterest is equivalent to seas:FeatureOfInterest, and the class  seas:Property is sub class of aff:Quality. Moreover, seas:hasProperty is sub property of aff:influencedBy, and seas:isPropertyOf is sub property of aff:belongsTo. Furthermore, aff:belongsTo is defined to be functional, to support the notion that a quality is intrinsic to the feature of interest (i.e., an entity) to which it belongs (according to the conceptualization in DUL); and it is asserted that every quality belongs to a feature of interest (aff:Quality rdfs:subClassOf aff:belongsTo some aff:FeatureOfInterest). 
+
+Finally, the object chain axiom aff:influencedBy o aff:affectedBy rdfs:subPropertyOf aff:influencedBy is asserted."""@en ,
+                                                                        """The Execution-Executor-Procedure (EEP) ODP imports the AffectedBy ODP (https://w3id.org/affectedBy), that involves classes for Features of Interest and their intrinsic Properties/Qualities. 
+
+The EEP ODP is an adaptation of the Procedure Execution Ontology (PEP) (https://w3id.org/pep/pep-1.1) from the SEAS ontology which, in turn, is a generalization of the Observation-Sensor-Procedure and Actuation-Actuator-Procedure patterns used in the SOSA (http://www.w3.org/ns/sosa/) and SSN (http://www.w3.org/ns/ssn/) ontologies.
+
+From the AffectedBy ODP, the EEP ODP imports the notion that a property/quality is intrinsic to the feature of interest that it belongs to (i.e., according to the definition of the class Quality in the DUL ontology http://www.ontologydesignpatterns.org/ont/dul/DUL.owl).
+Apart from the two classes imported from the AffectedBy ODP (aff:FeatureOfIntetest and aff:Quality), the EEP ODP consists of three more classes: Execution, Executor, and Procedure. The class Execution and their three functional object properties: eep:madeBy, eep:usedProcedure, and eep:onQuality, forms the backbone of the ODP. The property eep:madeBy links an execution to its executor, the property eep:usedProcedure links an execution to its procedure, and the property eep:onQuality links an execution to the quality/property concerned by the execution. Therefore, an execution jointly with their three object values of the three aforementioned properties can be considered as a n-ary relationship. Note that every quality belongs to unique feature of interest. Therefore, a feature of interest is involved in the n-ary relationship.
+
+The remaining object properties: eep:implements, that links executors to  procedures, eep:hasFeatureOfInteres, that links executions to features of interest, eep:forQuality, that links executors to qualities, and eep:forFeatureOfInterest, that links executors to features of interest, are defined in terms of the functional object properties using property chain axioms."""@en ,
+                                                                        "The Wind Farm Ontology (wfont) describes wind farms and their components. It is inspired by the SANDIA Report SAND2009-1171 and DAEKIN project outcomes. It reuses the AffectedBy and EEP (Execution-Executor-Procedure) ontology design patterns to discover sensors or actuators that observe or act on a given quality or feature of interest."@en ;
+                                 <http://purl.org/dc/terms/modified> "2018-09-01"^^xsd:string ,
+                                                                     "2018-11-28"^^xsd:string ,
+                                                                     "2021-11-04"^^xsd:string ;
+                                 <http://purl.org/dc/terms/title> "AffectedBy ODP"@en ,
+                                                                  "Execution-Executor-Procedure ODP"^^xsd:string ,
+                                                                  "Wind Farm Ontology (wfont)"^^xsd:string ;
+                                 <http://purl.org/vocab/vann/preferredNamespacePrefix> "aff"^^xsd:string ,
+                                                                                       "eep"^^xsd:string ,
+                                                                                       "wfont"^^xsd:string ;
+                                 <http://purl.org/vocab/vann/preferredNamespaceUri> <https://w3id.org/affectedBy/> ,
+                                                                                    <https://w3id.org/eep/> ,
+                                                                                    <https://w3id.org/wfont#> ;
+                                 <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#coversRequirements> """(CQ1). What are the observations/actuations performed by a given procedure?    
+(CQ2). What are the observations/actuations performed by a given sensor/actuator?    
+(CQ3). What are the procedures implemented by a given sensor/actuator?    
+(CQ4). What are the features of interest on a given observation/actuation?    
+(CQ5). What are the properties/qualities sensed/actuated by a given observations/actuations?    
+(CQ6). What are the features of interest of a given sensor/actuator?    
+(CQ7). What are the properties/qualities sensed/actuated by a given executor?"""@en ,
+                                                                                                                           """(CQ1). What are the properties/qualities that influence a feature of interest?    
+(CQ2). What are the properties/qualities that affect a given property of a feature of interest?   
+(CQ3). Which feature of interest does a given property/quality belongs to?"""@en ;
+                                 <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasComponent> <https://w3id.org/AffectedBy/> ;
+                                 <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasConsequences> """A quality cannot exist without the feature of interest to which it belongs. A quality is intrinsic to the feature of interest to which it belongs. For example, the temperature of room X cannot exist without the room X, and it is a different quality to the temperature of a different room Y.
+
+A quality can affect another quality, but not necessarily the other way around. For example, a quality Z may affect the quality W, but the quality W does not need to affect quality Z."""@en ,
+                                                                                                                        """Axioms included in the EEP ODP provide inferences that allow to answer the competency questions properly. Therefore, solving some weaknesses of the sosa/ssn ontologies.
+
+Note that only triples about the four functional object properties: eep:madeBy, eep:usedProcedure, eep:onQuality, and aff:belongsTo, needs to be asserted, the remaining triples are inferred by the property axioms."""@en ;
+                                 <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasIntent> "To represent executions made by executors that implement procedures. Executions are events like observations or actuations. Executors are systems like sensors or actuators that produce executions. Executors implement procedures to carry out their goals. Executions and executors are taken over features of interest and their intrinsic properties/qualities."@en ,
+                                                                                                                  "To represent properties/qualities that may affect the status of a feature of interest."@en ;
+                                 <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#reengineeredFrom> <https://w3id.org/seas/FeatureOfInterestOntology-1.0> ,
+                                                                                                                         """PEP: https://w3id.org/pep/pep-1.1
+
+SOSA: http://www.w3.org/ns/sosa/
+
+SSN: http://www.w3.org/ns/ssn/
+
+DUL: http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"""^^xsd:string ;
+                                 <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#relatedCPs> <https://w3id.org/pep/pep-1.1> ,
+                                                                                                                   <https://w3id.org/seas/FeatureOfInterestOntology-1.0> ;
+                                 <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#scenarios> """A room (feature of interest) has a temperature (quality) and this temperature is affected by the air conditioner status, by the number of people in the room, and by the sun radiation that passes through the room’s windows.
+
+A basement (feature of interest) has a temperature (quality) that is affected by the air conditioner status, by level of the basement’s relative humidity, and by the quality of the thermal insulation of the walls.
+
+Room temperature and basement temperature are different qualities, although both could be individuals of a Temperature subclass of Quality class."""@en ;
+                                 owl:versionInfo "0.2"@es ,
+                                                 1.1 ,
+                                                 1.2 .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://creativecommons.org/ns#license
+<http://creativecommons.org/ns#license> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/contributor
+<http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/created
+<http://purl.org/dc/terms/created> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+<http://purl.org/dc/terms/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/issued
+<http://purl.org/dc/terms/issued> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+<http://purl.org/dc/terms/modified> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+<http://purl.org/dc/terms/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+<http://purl.org/vocab/vann/preferredNamespacePrefix> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespaceUri
+<http://purl.org/vocab/vann/preferredNamespaceUri> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#coversRequirements
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#coversRequirements> rdf:type owl:AnnotationProperty ;
+                                                                                          rdfs:comment "This annotation property is used for exemplifying possible requirements the content pattern provides a solution for. Requirements are expressed as natural language competency questions." .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#extractedFrom
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#extractedFrom> rdf:type owl:AnnotationProperty ;
+                                                                                     rdfs:comment "This annotation property should be assigned with a URI, which points to the possible reference ontology which the annotated pattern was extracted from (i.e. the reference ontology that the ontology elements have been deeply or partially cloned by). The range is not explicit in the definition of the annotation property because it would turn the ontology to OWL Full. E.g. The participation pattern is extracted from the Dolce Ultra Lite ontology, hence the value for this annotation property is http://www.ontologydesignpatterns.org/ont/dul/DUL.owl" .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasComponent
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasComponent> rdf:type owl:AnnotationProperty ;
+                                                                                    rdfs:comment "This annotation property is useful for content ontology design patterns. Its value is a URI, which refers to another content ontology design pattern which is a component of the annotated one." .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasConsequences
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasConsequences> rdf:type owl:AnnotationProperty ;
+                                                                                       rdfs:comment "This annotation property is used for briefly describing the benefits and/or possible trade-offs when using the CP." .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasIntent
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasIntent> rdf:type owl:AnnotationProperty ;
+                                                                                 rdfs:comment "This annotation property is used in order to describe the intent of the content pattern." .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasUnitTest
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#hasUnitTest> rdf:type owl:AnnotationProperty ;
+                                                                                   rdfs:comment "This property can be used to annotate a unit test (e.g. in the form of a SPARQL query) to be launched to evaluate an ontology against a requirement-based task." .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#isCloneOf
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#isCloneOf> rdf:type owl:AnnotationProperty ;
+                                                                                 rdfs:comment "This annotation property is used for referring a cloned ontology entity to its cloning source." .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#isSpecializationOf
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#isSpecializationOf> rdf:type owl:AnnotationProperty ;
+                                                                                          rdfs:comment "This annotation property is useful for content ontology design patterns and its elements. Its value is a URI, which refers either to a content ontology design pattern that is specialized by the annotated one, or to an ontology element that is specialized by the annotated one." .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#reengineeredFrom
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#reengineeredFrom> rdf:type owl:AnnotationProperty ;
+                                                                                        rdfs:comment "This annotation property should be assigned with a URI, which points to the concept schema, page, or anything else from which the annotated pattern was reengineered.  If the source does not have any URI e.g., a printed book, this property value should provide information as precise as possible in order to identify the source. This property is alternative to the extractedFrom property because it is used when the pattern come from a concept schema which is not an owl ontology. For example content ontology design patterns, which are reengineered from data model patterns, rdf schemas, etc. should be annotatd with this property. E.g. The basicpersonalfoaf pattern is extracted from the rdf FOAF specification, hence the value for this annotation property is http://xmlns.com/foaf/spec/20071002.rdf" .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#relatedCPs
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#relatedCPs> rdf:type owl:AnnotationProperty ;
+                                                                                  rdfs:comment "This annotation property can be used to indicate other CPs (if any) that specialize, generalize, inlcude, or are components of the CP. Furthermore, this field may indicate other CPs that are typically used in conjunction with the described one. Important similarities and differences with other patterns can be also described here." .
+
+
+###  http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#scenarios
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#scenarios> rdf:type owl:AnnotationProperty ;
+                                                                                 rdfs:comment "This annotation property is used for describing examples of instantiation of the Content OP. For example, for the part-of Content OP (which represents part-whole relations) a possible scenario is the sentence: \"the brain is part of the human body\". Scenarios are expressed as natural language sentences." .
+
+
+###  http://www.w3.org/2003/06/sw-vocab-status/ns#term_status
+<http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://w3id.org/affectedBy#affectedBy
+<https://w3id.org/affectedBy#affectedBy> rdf:type owl:ObjectProperty ,
+                                                  owl:TransitiveProperty ;
+                                         rdfs:domain <https://w3id.org/affectedBy#Quality> ;
+                                         rdfs:range <https://w3id.org/affectedBy#Quality> ;
+                                         rdfs:comment "A relation between qualities. A quality is affected by another quality if the value of the latter affects the value of the former."^^xsd:string ;
+                                         rdfs:isDefinedBy <https://w3id.org/affectedBy/> ;
+                                         rdfs:label "affectedBy"@en ;
+                                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/affectedBy#belongsTo
+<https://w3id.org/affectedBy#belongsTo> rdf:type owl:ObjectProperty ;
+                                        rdfs:subPropertyOf [ owl:inverseOf <https://w3id.org/affectedBy#influencedBy>
+                                                           ] ;
+                                        rdf:type owl:FunctionalProperty ;
+                                        rdfs:domain <https://w3id.org/affectedBy#Quality> ;
+                                        rdfs:range <https://w3id.org/affectedBy#FeatureOfInterest> ;
+                                        rdfs:comment "A relation between qualities and features of interest. Every quality belongs to the feature of interest it is intrinsic to."^^xsd:string ;
+                                        rdfs:isDefinedBy <https://w3id.org/affectedBy/> ;
+                                        rdfs:label "belongsTo"@en ;
+                                        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/affectedBy#influencedBy
+<https://w3id.org/affectedBy#influencedBy> rdf:type owl:ObjectProperty ;
+                                           rdfs:domain <https://w3id.org/affectedBy#FeatureOfInterest> ;
+                                           rdfs:range <https://w3id.org/affectedBy#Quality> ;
+                                           owl:propertyChainAxiom ( <https://w3id.org/affectedBy#influencedBy>
+                                                                    <https://w3id.org/affectedBy#affectedBy>
+                                                                  ) ;
+                                           rdfs:comment "A relation between features of interest and qualities."^^xsd:string ;
+                                           rdfs:isDefinedBy <https://w3id.org/affectedBy/> ;
+                                           rdfs:label "influencedBy"@en ;
+                                           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#forFeatureOfInterest
+<https://w3id.org/eep#forFeatureOfInterest> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <https://w3id.org/eep#Executor> ;
+                                            rdfs:range <https://w3id.org/affectedBy#FeatureOfInterest> ;
+                                            owl:propertyChainAxiom ( <https://w3id.org/eep#forQuality>
+                                                                     <https://w3id.org/affectedBy#belongsTo>
+                                                                   ) ;
+                                            rdfs:comment "Relation that links an executor to the features of interest of the executions it made."^^xsd:string ;
+                                            rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                                            rdfs:label "forFeatureOfInterest"@en ;
+                                            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#forQuality
+<https://w3id.org/eep#forQuality> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <https://w3id.org/eep#Executor> ;
+                                  rdfs:range <https://w3id.org/affectedBy#Quality> ;
+                                  owl:propertyChainAxiom ( [ owl:inverseOf <https://w3id.org/eep#madeBy>
+                                                           ]
+                                                           <https://w3id.org/eep#onQuality>
+                                                         ) ;
+                                  rdfs:comment "Relation that links an executor to the qualities acted upon by the executions it made."^^xsd:string ;
+                                  rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                                  rdfs:label "forQuality"@en ;
+                                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#hasFeatureOfInterest
+<https://w3id.org/eep#hasFeatureOfInterest> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <https://w3id.org/eep#Execution> ;
+                                            rdfs:range <https://w3id.org/affectedBy#FeatureOfInterest> ;
+                                            owl:propertyChainAxiom ( <https://w3id.org/eep#onQuality>
+                                                                     <https://w3id.org/affectedBy#belongsTo>
+                                                                   ) ;
+                                            rdfs:comment "Relation that links an execution to the feature of interest it is acting upon."^^xsd:string ;
+                                            rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                                            rdfs:label "hasFeatureOfInterest"@en ;
+                                            <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#implements
+<https://w3id.org/eep#implements> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <https://w3id.org/eep#Executor> ;
+                                  rdfs:range <https://w3id.org/eep#Procedure> ;
+                                  owl:propertyChainAxiom ( [ owl:inverseOf <https://w3id.org/eep#madeBy>
+                                                           ]
+                                                           <https://w3id.org/eep#usedProcedure>
+                                                         ) ;
+                                  rdfs:comment "Relation that links an agent (Executor) to a procedure that it implements."^^xsd:string ;
+                                  rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                                  rdfs:label "implements"@en ;
+                                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#madeBy
+<https://w3id.org/eep#madeBy> rdf:type owl:ObjectProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain <https://w3id.org/eep#Execution> ;
+                              rdfs:range <https://w3id.org/eep#Executor> ;
+                              rdfs:comment "Relation that links an execution to the executor that made the execution."^^xsd:string ;
+                              rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                              rdfs:label "madeBy"@en ;
+                              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#onQuality
+<https://w3id.org/eep#onQuality> rdf:type owl:ObjectProperty ,
+                                          owl:FunctionalProperty ;
+                                 rdfs:domain <https://w3id.org/eep#Execution> ;
+                                 rdfs:range <https://w3id.org/affectedBy#Quality> ;
+                                 rdfs:comment "Relation that links an execution to the quality it is acting upon."^^xsd:string ;
+                                 rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                                 rdfs:label "onQuality"@en ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#usedProcedure
+<https://w3id.org/eep#usedProcedure> rdf:type owl:ObjectProperty ,
+                                              owl:FunctionalProperty ;
+                                     rdfs:domain <https://w3id.org/eep#Execution> ;
+                                     rdfs:range <https://w3id.org/eep#Procedure> ;
+                                     rdfs:comment "A relation that links an execution to the procedure used in making the execution through an executor agent."^^xsd:string ;
+                                     rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                                     rdfs:label "usedProcedure"@en ;
+                                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#hasIndicator
+<https://w3id.org/wfont#hasIndicator> rdf:type owl:ObjectProperty ;
+                                      rdfs:range <https://w3id.org/wfont#Indicator> ;
+                                      rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                      rdfs:label "hasIndicator"@en ,
+                                                 "tieneIndicador"@es .
+
+
+###  https://w3id.org/wfont#hasPart
+<https://w3id.org/wfont#hasPart> rdf:type owl:ObjectProperty ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "hasPart"@en ,
+                                            "tieneParte"@es .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/vocommons/voaf#Vocabulary
+<http://purl.org/vocommons/voaf#Vocabulary> rdf:type owl:Class .
+
+
+###  https://w3id.org/affectedBy#FeatureOfInterest
+<https://w3id.org/affectedBy#FeatureOfInterest> rdf:type owl:Class ;
+                                                rdfs:comment "A feature of interest is an abstraction of a real world phenomena (object, event, etc). A feature of interest is then described in terms of its properties or qualities, which are qualifiable, quantifiable, observable or operable qualities of the feature of interest."^^xsd:string ;
+                                                rdfs:isDefinedBy <https://w3id.org/affectedBy/> ;
+                                                rdfs:label "FeatureOfInterest"@en ;
+                                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/affectedBy#Quality
+<https://w3id.org/affectedBy#Quality> rdf:type owl:Class ;
+                                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                        owl:onProperty <https://w3id.org/affectedBy#belongsTo> ;
+                                                        owl:someValuesFrom <https://w3id.org/affectedBy#FeatureOfInterest>
+                                                      ] ;
+                                      rdfs:comment "A quality of a feature of interest. An aspect of a feature of interest that is intrinsec to and cannot exist without the feature of interest. Every quality belongs to the feature of interest it is intrinsic to."^^xsd:string ;
+                                      rdfs:isDefinedBy <https://w3id.org/affectedBy/> ;
+                                      rdfs:label "Quality"@en ;
+                                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#Execution
+<https://w3id.org/eep#Execution> rdf:type owl:Class ;
+                                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/eep#madeBy> ;
+                                                   owl:someValuesFrom <https://w3id.org/eep#Executor>
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/eep#onQuality> ;
+                                                   owl:someValuesFrom <https://w3id.org/affectedBy#Quality>
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/eep#usedProcedure> ;
+                                                   owl:someValuesFrom <https://w3id.org/eep#Procedure>
+                                                 ] ;
+                                 rdfs:comment "An event made by an agent executing a task implemented by a procedure."^^xsd:string ;
+                                 rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                                 rdfs:label "Execution"@en ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#Executor
+<https://w3id.org/eep#Executor> rdf:type owl:Class ;
+                                rdfs:comment "An agent that produces an event (Execution) by implementing a procedure."^^xsd:string ;
+                                rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                                rdfs:label "Executor"@en ;
+                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/eep#Procedure
+<https://w3id.org/eep#Procedure> rdf:type owl:Class ;
+                                 rdfs:comment "A workflow, protocol, plan, algorithm, or computational method specifying how to produce an event."^^xsd:string ;
+                                 rdfs:isDefinedBy <https://w3id.org/eep/> ;
+                                 rdfs:label "Procedure"@en ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#AbrasiveWearLevel
+<https://w3id.org/wfont#AbrasiveWearLevel> rdf:type owl:Class ;
+                                           rdfs:subClassOf <https://w3id.org/wfont#Indicator> ;
+                                           rdfs:comment "Indicates the warning and alarm level for having abrasive particles in the oil, it is calculated using Cutting parameter of the sensor."@en ;
+                                           rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                           rdfs:label "Abrasive Wear Level"@en ;
+                                           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#AdhesiveWearLevel
+<https://w3id.org/wfont#AdhesiveWearLevel> rdf:type owl:Class ;
+                                           rdfs:subClassOf <https://w3id.org/wfont#Indicator> ;
+                                           rdfs:comment "Indicates the warning and alarm level for having sliding particles in the oil, it is calculated using Sliding parameter of the sensor."@en ;
+                                           rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                           rdfs:label "Adhesive Wear Level"@en ;
+                                           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#AirContentLevel
+<https://w3id.org/wfont#AirContentLevel> rdf:type owl:Class ;
+                                         rdfs:subClassOf <https://w3id.org/wfont#Indicator> ;
+                                         rdfs:comment "Indicates the warning and alarm level for having bubbles in the oil, it is calculated using Bubbles parameter of the sensor."@en ;
+                                         rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                         rdfs:label "Air Content Level"@en ;
+                                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#BigBubbles
+<https://w3id.org/wfont#BigBubbles> rdf:type owl:Class ;
+                                    rdfs:subClassOf <https://w3id.org/wfont#Bubbles> ;
+                                    rdfs:comment "Number of bubbles per milimiter bigger than 21 μm."@en ;
+                                    rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                    rdfs:label "Big Bubbles"@en ;
+                                    <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#BigParticles
+<https://w3id.org/wfont#BigParticles> rdf:type owl:Class ;
+                                      rdfs:subClassOf <https://w3id.org/wfont#Particles> ;
+                                      rdfs:comment "Number of particles per milimiter bigger than 21 μm."@en ;
+                                      rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                      rdfs:label "Big Particles"@en ;
+                                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Bubbles
+<https://w3id.org/wfont#Bubbles> rdf:type owl:Class ;
+                                 rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                                 rdfs:comment "Number of bubbles per milimiter."@en ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "Bubbles"@en ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Bushing
+<https://w3id.org/wfont#Bushing> rdf:type owl:Class ;
+                                 rdfs:subClassOf <https://w3id.org/wfont#GearboxTorqueArmSystem> ;
+                                 rdfs:comment "A mechanical device used to reduce vibrations."@en ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "Buje"@es ,
+                                            "Bushing"@en ;
+                                 rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#CarrierBearing
+<https://w3id.org/wfont#CarrierBearing> rdf:type owl:Class ;
+                                        rdfs:subClassOf <https://w3id.org/wfont#GearboxBearing> ;
+                                        rdfs:comment "It is the bearing that support the carrier. The carrier holds the planet gears at different radio from the sun gear centerline."@en ;
+                                        rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                        rdfs:label "Carrier Bearing"@en ,
+                                                   "Rodamiento Portador"@es ;
+                                        rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#CleanlinessLevel
+<https://w3id.org/wfont#CleanlinessLevel> rdf:type owl:Class ;
+                                          rdfs:subClassOf <https://w3id.org/wfont#Indicator> ;
+                                          rdfs:comment "Indicates the warning and alarm level for having particles in the oil, it is calculated using ISO4, ISO6 and ISO14 parameter of the sensor."@en ;
+                                          rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                          rdfs:label "Cleanliness Level"@en ;
+                                          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#CoolantPump
+<https://w3id.org/wfont#CoolantPump> rdf:type owl:Class ;
+                                     rdfs:subClassOf <https://w3id.org/wfont#CoolingSystem> ;
+                                     rdfs:comment "Circulates the liquid from the cooling system."@en ;
+                                     rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                     rdfs:label "Bomba de Refrigerante"@es ,
+                                                "Coolant Pump"@en ;
+                                     rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#CoolingSystem
+<https://w3id.org/wfont#CoolingSystem> rdf:type owl:Class ;
+                                       rdfs:subClassOf <https://w3id.org/wfont#GearboxLubeSystem> ;
+                                       rdfs:comment "Reduces the temperature of the oil from the lubricating system."@en ;
+                                       rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                       rdfs:label "Cooling System"@en ,
+                                                  "Sistema de Refrigeración"@es ;
+                                       rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Cutting
+<https://w3id.org/wfont#Cutting> rdf:type owl:Class ;
+                                 rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                                 rdfs:comment "Number of particles related to cutting wear per milimiter."@en ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "Cutting"@en ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Fatigue
+<https://w3id.org/wfont#Fatigue> rdf:type owl:Class ;
+                                 rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                                 rdfs:comment "Number of particles related to fatigue wear per milimiter."@en ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "Fatigue"@en ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#FatigueWearLevel
+<https://w3id.org/wfont#FatigueWearLevel> rdf:type owl:Class ;
+                                          rdfs:subClassOf <https://w3id.org/wfont#Indicator> ;
+                                          rdfs:comment "Indicates the warning and alarm level for having fatigue particles in the oil, it is calculated using Fatigue parameter of the sensor."@en ;
+                                          rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                          rdfs:label "Fatigue Wear Level"@en ;
+                                          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Fiber
+<https://w3id.org/wfont#Fiber> rdf:type owl:Class ;
+                               rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                               rdfs:comment "Number of particles related to fiber particles per milimiter."@en ;
+                               rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                               rdfs:label "Fiber"@en ;
+                               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#FibreContaminationLevel
+<https://w3id.org/wfont#FibreContaminationLevel> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <https://w3id.org/wfont#Indicator> ;
+                                                 rdfs:comment "Indicates the warning and alarm level for having fibre particles in the oil, it is calculated using Fibre parameter of the sensor."@en ;
+                                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                                 rdfs:label "Fibre Contamination Level"@en ;
+                                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Gearbox
+<https://w3id.org/wfont#Gearbox> rdf:type owl:Class ;
+                                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/wfont#hasIndicator> ;
+                                                   owl:someValuesFrom <https://w3id.org/wfont#Indicator>
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/wfont#hasPart> ;
+                                                   owl:someValuesFrom <https://w3id.org/wfont#GearboxBearing>
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/wfont#hasPart> ;
+                                                   owl:someValuesFrom <https://w3id.org/wfont#GearboxGears>
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/wfont#hasPart> ;
+                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass <https://w3id.org/wfont#GearboxHousing>
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/wfont#hasPart> ;
+                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass <https://w3id.org/wfont#GearboxLubeSystem>
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/wfont#hasPart> ;
+                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass <https://w3id.org/wfont#GearboxTorqueArmSystem>
+                                                 ] ;
+                                 rdfs:comment "A set of gears with its casing, aimed at increasing or reducing speed."@en ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "Gearbox"@en ,
+                                            "Multiplicadora"@es ;
+                                 rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#GearboxBearing
+<https://w3id.org/wfont#GearboxBearing> rdf:type owl:Class ;
+                                        rdfs:subClassOf <https://w3id.org/wfont#GearboxComponent> ;
+                                        rdfs:comment "Consists of rings with raceway (inner ring and outer ring), rolling elements (either balls or rollers) and cage. The cage separates the rolling elements at regular intervals, holds them in place within the inner and outer raceways, and allows them to rotate freely."@en ;
+                                        rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                        rdfs:label "Bearing"@en ,
+                                                   "Rodamiento"@es ;
+                                        rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#GearboxComponent
+<https://w3id.org/wfont#GearboxComponent> rdf:type owl:Class ;
+                                          rdfs:comment "Constituting part or element of a gearbox."@en ;
+                                          rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                          rdfs:label "Componente de Multiplicadora"@es ,
+                                                     "Gearbox Component"@en ;
+                                          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#GearboxGears
+<https://w3id.org/wfont#GearboxGears> rdf:type owl:Class ;
+                                      rdfs:subClassOf <https://w3id.org/wfont#GearboxComponent> ;
+                                      rdfs:comment "It is a rotating circular machine part having teeth which mesh with another (compatible) toothed part to transmit (convert) torque and speed."@en ;
+                                      rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                      rdfs:label "Engranaje"@es ,
+                                                 "Gears"@en ;
+                                      rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#GearboxHousing
+<https://w3id.org/wfont#GearboxHousing> rdf:type owl:Class ;
+                                        rdfs:subClassOf <https://w3id.org/wfont#GearboxComponent> ;
+                                        rdfs:comment "A protective casing providing a reservoir of oil or grease for the gearing."@en ;
+                                        rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                        rdfs:label "Alojamiento"@es ,
+                                                   "Housing"@en ;
+                                        rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#GearboxLubeSystem
+<https://w3id.org/wfont#GearboxLubeSystem> rdf:type owl:Class ;
+                                           rdfs:subClassOf <https://w3id.org/wfont#GearboxComponent> ;
+                                           rdfs:comment "It controls the shifting process of the transmission, lubrication of the transmission parts to prevent frictional damage, and cooling of the transmission. "@en ;
+                                           rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                           rdfs:label "Lube System"@en ,
+                                                      "Sistema de Lubricación"@es ;
+                                           rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#GearboxTorqueArmSystem
+<https://w3id.org/wfont#GearboxTorqueArmSystem> rdf:type owl:Class ;
+                                                rdfs:subClassOf <https://w3id.org/wfont#GearboxComponent> ;
+                                                rdfs:comment "It is a long suspension arm that attaches between the housing and the Nacelle. Its primary job is to control axle housing rotation."@en ;
+                                                rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                                rdfs:label "Sistema de Brazo de Torque"@es ,
+                                                           "Torque Arm System"@en ;
+                                                rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#HollowShaft
+<https://w3id.org/wfont#HollowShaft> rdf:type owl:Class ;
+                                     rdfs:subClassOf <https://w3id.org/wfont#GearboxGears> ;
+                                     rdfs:comment "The ouput shaft of the gearbox witch has empty space inside."@en ;
+                                     rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                     rdfs:label "Eje hueco"@es ,
+                                                "Hollow Shaft"@en ;
+                                     rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Hose-Fitting
+<https://w3id.org/wfont#Hose-Fitting> rdf:type owl:Class ;
+                                      rdfs:subClassOf <https://w3id.org/wfont#GearboxLubeSystem> ;
+                                      rdfs:comment "Flexible tube and part attached to it where lube is carried."@en ;
+                                      rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                      rdfs:label "Hose/Fitting"@en ,
+                                                 "Manguera"@es ;
+                                      rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#ISO14
+<https://w3id.org/wfont#ISO14> rdf:type owl:Class ;
+                               rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                               rdfs:comment "Number of particles per milimiter bigger than 14 μm. Related to ISO 4406:1999 method for coding the level of contamination by solid particles."@en ;
+                               rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                               rdfs:label "ISO14"@en ;
+                               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#ISO4
+<https://w3id.org/wfont#ISO4> rdf:type owl:Class ;
+                              rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                              rdfs:comment "Number of particles per milimiter bigger than 4 μm. Related to ISO 4406:1999 method for coding the level of contamination by solid particles."@en ;
+                              rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                              rdfs:label "ISO4"@en ;
+                              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#ISO6
+<https://w3id.org/wfont#ISO6> rdf:type owl:Class ;
+                              rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                              rdfs:comment "Number of particles per milimiter bigger than 6 μm. Related to ISO 4406:1999 method for coding the level of contamination by solid particles."@en ;
+                              rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                              rdfs:label "ISO6"@en ;
+                              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Indicator
+<https://w3id.org/wfont#Indicator> rdf:type owl:Class ;
+                                   rdfs:comment "Something that shows what a situation is like."@en ;
+                                   rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                   rdfs:label "Indicador"@es ,
+                                              "Indicator"@en ;
+                                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#LubePump
+<https://w3id.org/wfont#LubePump> rdf:type owl:Class ;
+                                  rdfs:subClassOf <https://w3id.org/wfont#GearboxLubeSystem> ;
+                                  rdfs:comment "Circulates the lubricant from the lube system."@en ;
+                                  rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                  rdfs:label "Bomba de Lubricación"@es ,
+                                             "Lube Pump"@en ;
+                                  rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#LubePumpMotor
+<https://w3id.org/wfont#LubePumpMotor> rdf:type owl:Class ;
+                                       rdfs:subClassOf <https://w3id.org/wfont#GearboxLubeSystem> ;
+                                       rdfs:comment "It supplies motive power to the pump."@en ;
+                                       rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                       rdfs:label "Lube Pump Motor"@en ,
+                                                  "Motor de Bomba de Lubricación"@es ;
+                                       rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Nacelle
+<https://w3id.org/wfont#Nacelle> rdf:type owl:Class ;
+                                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://w3id.org/wfont#hasPart> ;
+                                                   owl:someValuesFrom <https://w3id.org/wfont#Gearbox>
+                                                 ] ;
+                                 rdfs:comment "A housing which contains the drive‑train and other elements on top of a horizontal axis wind turbine tower."@en ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "Góndola"@es ,
+                                            "Nacelle"@en ;
+                                 rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#OilDegradation
+<https://w3id.org/wfont#OilDegradation> rdf:type owl:Class ;
+                                        rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                                        rdfs:comment "State of the oil degradation level in the different stages of its useful life."@en ;
+                                        rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                        rdfs:label "Oil Degradation"@en ;
+                                        <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#OilDegradationLevel
+<https://w3id.org/wfont#OilDegradationLevel> rdf:type owl:Class ;
+                                             rdfs:subClassOf <https://w3id.org/wfont#Indicator> ;
+                                             rdfs:comment "Indicates the warning and alarm level for oil degradation in the oil, it is calculated using OD parameter of the sensor."@en ;
+                                             rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                             rdfs:label "Oil Degradation Level"@en ;
+                                             <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Particles
+<https://w3id.org/wfont#Particles> rdf:type owl:Class ;
+                                   rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                                   rdfs:comment "Number of particles per milimiter."@en ;
+                                   rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                   rdfs:label "Particles"@en ;
+                                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#PlanetBearing
+<https://w3id.org/wfont#PlanetBearing> rdf:type owl:Class ;
+                                       rdfs:subClassOf <https://w3id.org/wfont#GearboxBearing> ;
+                                       rdfs:comment "Consists of the bearing mounted in the planet gear."@en ;
+                                       rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                       rdfs:label "Planet Bearing"@en ,
+                                                  "Rodamiento Planetario"@es ;
+                                       rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                       <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#PlanetGear
+<https://w3id.org/wfont#PlanetGear> rdf:type owl:Class ;
+                                    rdfs:subClassOf <https://w3id.org/wfont#GearboxGears> ;
+                                    rdfs:comment "It is the gear that rotates around the sun gear."@en ;
+                                    rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                    rdfs:label "Engranaje Planetario"@es ,
+                                               "Planet Gear"@en ;
+                                    rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                    <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#PrimaryFiltration
+<https://w3id.org/wfont#PrimaryFiltration> rdf:type owl:Class ;
+                                           rdfs:subClassOf <https://w3id.org/wfont#GearboxLubeSystem> ;
+                                           rdfs:comment "First step of lube filtration system."@en ;
+                                           rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                           rdfs:label "Filtración Primaria"@es ,
+                                                      "Primary Filtration"@en ;
+                                           rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Radiator
+<https://w3id.org/wfont#Radiator> rdf:type owl:Class ;
+                                  rdfs:subClassOf <https://w3id.org/wfont#CoolingSystem> ;
+                                  rdfs:comment "It is a heat exchanger use to transfer thermal energy from one medium to another."@en ;
+                                  rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                  rdfs:label "Radiador"@es ,
+                                             "Radiator"@en ;
+                                  rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Reservoir
+<https://w3id.org/wfont#Reservoir> rdf:type owl:Class ;
+                                   rdfs:subClassOf <https://w3id.org/wfont#GearboxLubeSystem> ;
+                                   rdfs:comment "Lube compartment or tank that collect oil."@en ;
+                                   rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                   rdfs:label "Depósito"@es ,
+                                              "Reservoir"@en ;
+                                   rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                   <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#RingGear
+<https://w3id.org/wfont#RingGear> rdf:type owl:Class ;
+                                  rdfs:subClassOf <https://w3id.org/wfont#GearboxGears> ;
+                                  rdfs:comment "An outer ring with inward-facing teeth that mesh with the planet gear or gears."@en ;
+                                  rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                  rdfs:label "Engranaje de Anillo"@es ,
+                                             "Ring Gear"@en ;
+                                  rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#SecondaryFiltration
+<https://w3id.org/wfont#SecondaryFiltration> rdf:type owl:Class ;
+                                             rdfs:subClassOf <https://w3id.org/wfont#GearboxLubeSystem> ;
+                                             rdfs:comment "Second step of lube filtration system."@en ;
+                                             rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                             rdfs:label "Filtración Secundaria"@es ,
+                                                        "Secondary Filtration"@en ;
+                                             rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                             <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Sensor
+<https://w3id.org/wfont#Sensor> rdf:type owl:Class ;
+                                rdfs:subClassOf <https://w3id.org/eep#Executor> ,
+                                                <https://w3id.org/wfont#GearboxLubeSystem> ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty <https://w3id.org/eep#forQuality> ;
+                                                  owl:someValuesFrom <https://w3id.org/affectedBy#Quality>
+                                                ] ;
+                                rdfs:comment "Device that converts a physical pehnomenon into a measurable data. In lube systems, collects information of the oil wear or operation."@en ;
+                                rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                rdfs:label "Sensor"@en ,
+                                           "Sensor"@es ;
+                                rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#SevereWearLevel
+<https://w3id.org/wfont#SevereWearLevel> rdf:type owl:Class ;
+                                         rdfs:subClassOf <https://w3id.org/wfont#Indicator> ;
+                                         rdfs:comment "Indicates the warning and alarm level for having big particles in the oil, it is calculated using BigParticles parameter of the sensor."@en ;
+                                         rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                         rdfs:label "Severe Wear Level"@en ;
+                                         <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#ShaftBearing
+<https://w3id.org/wfont#ShaftBearing> rdf:type owl:Class ;
+                                      rdfs:subClassOf <https://w3id.org/wfont#GearboxBearing> ;
+                                      rdfs:comment "Bearing which supports the intermediate shafting."@en ;
+                                      rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                      rdfs:label "Rodamiento de Eje"@es ,
+                                                 "Shaft Bearing"@en ;
+                                      rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                      <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Sliding
+<https://w3id.org/wfont#Sliding> rdf:type owl:Class ;
+                                 rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                                 rdfs:comment "Number of particles related to slidding wear per milimiter."@en ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "Sliding"@en ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#SpurGear
+<https://w3id.org/wfont#SpurGear> rdf:type owl:Class ;
+                                  rdfs:subClassOf <https://w3id.org/wfont#GearboxGears> ;
+                                  rdfs:comment "It has straight teeth and are parallel to the axis of the wheel."@en ;
+                                  rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                  rdfs:label "Engranaje Recto"@es ,
+                                             "Spur Gear"@en ;
+                                  rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#SunGear
+<https://w3id.org/wfont#SunGear> rdf:type owl:Class ;
+                                 rdfs:subClassOf <https://w3id.org/wfont#GearboxGears> ;
+                                 rdfs:comment "It is the central gear."@en ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "Engranaje Solar"@es ,
+                                            "Sun Gear"@en ;
+                                 rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#UnclassifiedWearLevel
+<https://w3id.org/wfont#UnclassifiedWearLevel> rdf:type owl:Class ;
+                                               rdfs:subClassOf <https://w3id.org/wfont#Indicator> ;
+                                               rdfs:comment "Indicates the warning and alarm level for having unclassified particles in the oil, it is calculated using Unknown parameter of the sensor."@en ;
+                                               rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                               rdfs:label "Unclassified Wear Level"@en ;
+                                               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#Unknown
+<https://w3id.org/wfont#Unknown> rdf:type owl:Class ;
+                                 rdfs:subClassOf <https://w3id.org/affectedBy#Quality> ;
+                                 rdfs:comment "Number of particles related to unknown particles per milimiter."@en ;
+                                 rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                 rdfs:label "Unknown"@en ;
+                                 <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#WindFarm
+<https://w3id.org/wfont#WindFarm> rdf:type owl:Class ;
+                                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                    owl:onProperty <https://w3id.org/wfont#hasPart> ;
+                                                    owl:someValuesFrom <https://w3id.org/wfont#WindTurbine>
+                                                  ] ;
+                                  rdfs:comment "A group of wind turbine generator jointly operated."@en ;
+                                  rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                  rdfs:label "Parque Eólico"@es ,
+                                             "Wind Farm"@en ;
+                                  rdfs:seeAlso "SAND2009-1171 Report - Appendix A: Taxonomy"^^xsd:string ;
+                                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+###  https://w3id.org/wfont#WindTurbine
+<https://w3id.org/wfont#WindTurbine> rdf:type owl:Class ;
+                                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                       owl:onProperty <https://w3id.org/wfont#hasPart> ;
+                                                       owl:someValuesFrom <https://w3id.org/wfont#Nacelle>
+                                                     ] ;
+                                     rdfs:comment "A rotating machinery in which the kinetic wind energy is transformed into another form of energy."@en ;
+                                     rdfs:isDefinedBy <https://w3id.org/wfont#> ;
+                                     rdfs:label "Aerogenerador"@es ,
+                                                "Wind Turbine"@en ;
+                                     <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable"^^xsd:string .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://w3id.org/affectedBy/
+<https://w3id.org/affectedBy/> rdf:type owl:NamedIndividual ,
+                                        <http://purl.org/vocommons/voaf#Vocabulary> .
+
+
+###  https://w3id.org/eep/
+<https://w3id.org/eep/> rdf:type owl:NamedIndividual .
+
+
+###  https://w3id.org/wfont#
+<https://w3id.org/wfont#> rdf:type owl:NamedIndividual .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
